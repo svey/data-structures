@@ -39,9 +39,14 @@ describe('linkedList', function() {
   it('should contain a value that was added', function() {
     linkedList.addToTail(4);
     linkedList.addToTail(5);
-    expect(linkedList.contains(4)).to.equal(true);
-    expect(linkedList.contains(5)).to.equal(true);
+    linkedList.addToTail(7); //added test
+    linkedList.removeHead(); //added test
+    linkedList.removeHead(); //added test
+    expect(linkedList.contains(4)).to.equal(false); //changed
+    expect(linkedList.contains(5)).to.equal(false); //changed
     expect(linkedList.contains(6)).to.equal(false);
+    expect(linkedList.contains(7)).to.equal(true);  //changed
+
   });
 
   it('should not contain a value that was removed', function() {
@@ -51,5 +56,5 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
-  // add more tests here to test the functionality of linkedList
+  // add more tests here to test the functionality of linkedList (see lines 42 - 48 for added tests);
 });
