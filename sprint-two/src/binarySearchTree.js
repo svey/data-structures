@@ -1,62 +1,48 @@
 var BinarySearchTree = function(value) {
-	var branch = Object.create(binarySearchTree);
-	branch.value = value;
-	branch.left = null;
-	branch.right = null;
-	return branch;
+
+  var binaryTree = Object.create(binaryTreePrototype);
+  binaryTree.value = value;
+  binaryTree.left = null;
+  binaryTree.right = null;
+  return binaryTree;
+  };
+
+var binaryTreePrototype = {};
+
+binaryTreePrototype.insert = function(val) {
+  if (val < this.value) {
+    if (this.left === null) {
+      this.left = BinarySearchTree(val);
+    } else {
+      this.left.insert(val);
+    }
+  } else if (val > this.value) {
+    if (this.right === null) {
+      this.right = BinarySearchTree(val);
+    } else {
+      this.right.insert(val);
+    }
+  } else {
+    // do nothing: The tree already contains this value
+  }
 };
 
-var binarySearchTree = {};
-//O(log n)
-binarySearchTree.insert = function(value) {
-	if (value < this.value) {
-		if (!this.left) {
-			return this.left = BinarySearchTree(value);
-		} else {
-			return this.left.insert(value);
-		}
-	}
-	if (value > this.value) {
-		if (!this.right) {
-			return this.right = BinarySearchTree(value);
-		} else {
-			return this.right.insert(value);
-		}
-	}
+binaryTreePrototype.contains = function(val) {
+  if (val === this.value) {
+    return true;
+  } else if (val < this.value) {
+    return !!(this.left && this.left.contains(val));
+  } else if (val > this.value) {
+    return !!(this.right && this.right.contains(val));
+  }
 };
 
-//O(log n)
-binarySearchTree.contains = function(value) {
-	var contains = false;
-	if (value === this.value) {
-		return true;
-	}
-	if (value < this.value) {
-		if (this.left) {
-			return contains = this.left.contains(value);
-		}
-		return false;
-	}
-	if (value > this.value) {
-		if (this.right) {
-			return constains = this.right.contains(value);
-		} 
-		return false;	
-	}
-	return contains;
+binaryTreePrototype.depthFirstLog = function(callBack) {
+  callBack(this.value);
+  if (this.left) {
+    this.left.depthFirstLog(callBack);
+  }
+  if (this.right) {
+    this.right.depthFirstLog(callBack);
+  }
 };
-
-//O(n)
-binarySearchTree.depthFirstLog = function(callback) {
-	callback(this.value);
-	if (this.left) {
-		this.left.depthFirstLog(callback);
-	}
-	if (this.right) {
-		this.right.depthFirstLog(callback);
-	}
-};
-
-/*
- * Complexity: What is the time complexity of the above functions?
- */

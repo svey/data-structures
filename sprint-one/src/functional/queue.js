@@ -6,26 +6,31 @@ var Queue = function() {
   // Use an object with numeric keys to store values
   var storage = {};
 
+  var start = 0;
+  var end = 0;
+  
   // Implement the methods below
 
   someInstance.enqueue = function(value) {
-    size++;
-    storage[size] = value; 
 
-  };
+    storage[end++] = value;
+      };
 
   someInstance.dequeue = function() {
-    if(someInstance.size() > 0) {
-      firstInLine++;
-      var value = storage[firstInLine];
-      delete storage[firstInLine];
-      return value;
-    }
-  };
+
+    // This does some unnecessary work sometimes. Can you spot why?
+    var result = storage[start];
+    delete storage[start];
+
+    someInstance.size() && start++;
+
+    return result;
+      };
 
   someInstance.size = function() {
-    return size - firstInLine;
-  };
+
+    return end - start;
+      };
 
   return someInstance;
 };
