@@ -1,35 +1,12 @@
-
-//////////////////////////////////////////////////////////////////
-// This file contains two distinct solutions:
-//   - The solution presented in lecture
-//   - Refactored version that makes use of higher-order functions
-//
-// The two solutions are delineated by comment blocks.
-// To use the Higher-Order Function (HOF) version, uncomment the
-// line of code near the end of this file.
-
-//////////////////////////////////////////////////////////////////
-// Implementation #1:
-// Solution-Lecture implementation
-//
-// Notice how each function has a similar structure:
-//   - calculate an index
-//   - retreive an bucket at that location
-//   - iterate over the bucket, and
-//     - perform an action if the key is found
-//   - otherwise perform a not-found action
-//////////////////////////////////////////////////////////////////
-
 var HashTable = function() {
 
   this._size = 0;
     this._limit = 8;
   this._storage = LimitedArray(this._limit);
 };
-
+//O(1)
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-
   var bucket = this._storage.get(index) || [];
 
   for (var i = 0; i < bucket.length; i++) {
@@ -107,21 +84,6 @@ HashTable.prototype._resize = function(newLimit) {
     }
   }.bind(this));
 };
-
-/*
- * Complexity: What is the time complexity of the above functions?
- */
-
-
-//////////////////////////////////////////////////////////////////
-// Implementation #2:
-// Higher-Order Function implementation
-//
-// This version factors out the common code of searching for a
-// tuple in a bucket -- see _tupleSearch. That function performs
-// the specialized work of insert/retreive/remove by delegating
-// to the found and not-found callbacks.
-//////////////////////////////////////////////////////////////////
 
 var HashTableHOF = function() {
   this._size = 0;

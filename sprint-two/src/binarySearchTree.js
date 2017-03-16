@@ -46,7 +46,3 @@ binaryTreePrototype.depthFirstLog = function(callBack) {
     this.right.depthFirstLog(callBack);
   }
 };
-
-/*
- * Complexity: What is the time complexity of the above functions?
- */

@@ -3,10 +3,12 @@ var Set = function() {
 
   set._storage = {};
     return set;
+
 };
 
 var setPrototype = {};
 
+//O(1)
 setPrototype.add = function(item) {
 
   this._storage[item] = true;
@@ -20,8 +22,4 @@ setPrototype.contains = function(item) {
 setPrototype.remove = function(item) {
 
   delete this._storage[item];
-  };
-
-/*
- * Complexity: What is the time complexity of the above functions?
- */
+};

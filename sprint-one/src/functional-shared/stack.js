@@ -13,6 +13,24 @@ var Stack = function() {
 
 var stackMethods = {};
 
+stackMethods.push = function(value) {
+	this.stackSize++;
+	this.storage[this.stackSize] = value;
+};
+
+stackMethods.pop = function() {
+	if (this.stackSize > 0) {
+		var value = this.storage[this.stackSize];
+		delete this.storage[this.stackSize];
+		this.stackSize--;
+		return value;
+	}
+};
+
+stackMethods.size = function() {
+	return this.stackSize;
+};
+
 
 stackMethods.push = function(value) {
   this._storage[this._size++] = value;
